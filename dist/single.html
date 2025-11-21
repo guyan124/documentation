@@ -2,150 +2,574 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>How to Add a New Single Member</title>
+    <title>Unit Master – New Member Registration Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Font + Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f8ff;
+        :root {
+            --bg-body: #f3f4f6;
+            --bg-hero: #281746;
+            --accent: #6366f1;
+            --accent-soft: #e0e7ff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --doc-bg: #ffffff;
+            --border-soft: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: #003366;
         }
-        .container {
-            width: 80%;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+        html, body {
+            height: 100%;
         }
-        h1, h2 {
-            color: #0050a5;
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
+
+        .page-shell {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        p {
+
+        /* HERO HEADER */
+        .hero {
+            background: linear-gradient(135deg, #1f1235, #24104f 55%, #3b0764 100%);
+            color: #f9fafb;
+            padding: 3.5rem 1.5rem 4.5rem;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero-kicker {
+            font-size: 0.9rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.3rem, 3.3vw, 2.9rem);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .hero-doc-intro {
+            margin-top: 2rem;
+            background: #f9fafb;
+            color: var(--text-main);
+            border-radius: 1.5rem;
+            padding: 1.6rem 1.8rem;
+            max-width: 1040px;
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.28),
+                0 0 0 1px rgba(148, 163, 184, 0.18);
+        }
+
+        .hero-doc-intro p {
+            font-size: 0.95rem;
             line-height: 1.7;
-            font-size: 15px;
         }
-        .step-box {
-            background: #e9f2ff;
-            border-left: 5px solid #007bff;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border-radius: 6px;
+
+        .hero-doc-intro p span.highlight {
+            font-weight: 600;
+            color: var(--accent);
         }
-        ul {
-            margin-top: 10px;
+
+        /* MAIN DOCUMENT */
+        main {
+            flex: 1;
+            padding: 2.5rem 1.5rem 3.5rem;
         }
-        li {
-            margin-bottom: 6px;
+
+        .doc-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .highlight {
-            background: #d6ecff;
-            padding: 10px;
-            border-radius: 5px;
+
+        .doc-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.28rem 0.7rem;
+            font-size: 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: #ffffff;
+            color: var(--text-muted);
+        }
+
+        .meta-pill i {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .doc-section {
+            background: var(--doc-bg);
+            border-radius: 1.2rem;
+            border: 1px solid var(--border-soft);
+            padding: 1.35rem 1.6rem 1.4rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+            position: relative;
+
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .doc-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .doc-section:hover {
+            border-color: var(--accent-soft);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+        }
+
+        .doc-section-header {
+            display: flex;
+            gap: 0.9rem;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .doc-step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 0, var(--accent), #312e81);
+            color: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+            flex-shrink: 0;
+        }
+
+        .doc-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            position: relative;
+        }
+
+        .doc-section-title span.badge {
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.12rem 0.5rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: #4f46e5;
+        }
+
+        .doc-section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.32rem;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .doc-section:hover .doc-section-title::after {
+            width: 100%;
+        }
+
+        .doc-section-body {
+            margin-top: 0.7rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .doc-section-body p + p {
+            margin-top: 0.55rem;
+        }
+
+        .doc-section-body ul {
+            margin-top: 0.4rem;
+            margin-left: 1.2rem;
+            list-style: disc;
+        }
+
+        .doc-section-body li + li {
+            margin-top: 0.18rem;
+        }
+
+        .doc-section-body strong {
+            color: #111827;
+        }
+
+        /* Hover highlight on headings (smooth colour change) */
+        .doc-section-title {
+            transition: color 0.25s ease;
+            cursor: default;
+        }
+
+        .doc-section:hover .doc-section-title {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2.6rem 1.1rem 3.3rem;
+            }
+
+            .hero-doc-intro {
+                padding: 1.3rem 1.35rem;
+                border-radius: 1.1rem;
+            }
+
+            .doc-section {
+                padding: 1.15rem 1.2rem 1.2rem;
+                border-radius: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>How to Add a New Single Member</h1>
-        <p>
-            Welcome to the New Member Registration Guide! This guide will help you register
-            a <strong>Single Member</strong> in the system. Follow each step carefully to complete the registration successfully.
-        </p>
+<div class="page-shell">
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-inner">
+            <p class="hero-kicker">Unit Master Documentation</p>
+            <h1 class="hero-title">Welcome to Unit Master</h1>
+            <p class="hero-subtitle">
+                A guided document to help you register new single members quickly and correctly.
+            </p>
 
-        <div class="step-box">
-            <h2>Step 1: Access the "Add New Member" Page</h2>
-            <ul>
-                <li>Log into the application and click on <strong>Members</strong> in the left sidebar.</li>
-                <li>Click on the <strong>Add a New Member</strong> button to begin.</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 2: Choose the Member Type</h2>
-            <p>Select <strong>Single Member</strong> from the dropdown list.</p>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 3: Fill in Personal Details</h2>
-            <ul>
-                <li>Salutation</li>
-                <li>First Name</li>
-                <li>Surname</li>
-                <li>Date of Birth</li>
-                <li>Gender</li>
-                <li>Country of Birth</li>
-                <li>Marital Status</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 4: Add Contact Details</h2>
-            <ul>
-                <li>District</li>
-                <li>Telephone Number</li>
-                <li>Mobile Phone Number</li>
-                <li>Email Address</li>
-                <li>Physical Address</li>
-                <li>Receive Statement Via (Email or Post)</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 5: Add Next of Kin Information</h2>
-            <ul>
-                <li>Full Name</li>
-                <li>Relationship</li>
-                <li>Phone Number</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 6: Statutory Details</h2>
-            <ul>
-                <li>Is Client Resident — Yes/No</li>
-                <li>Tax PIN</li>
-                <li>Income Range</li>
-                <li>Adverse Media Screening Done — Yes/No</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 7: Employment Details (If Applicable)</h2>
-            <p>If the client is employed, additional fields will appear for occupation and employer information.</p>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 8: Account Details</h2>
-            <ul>
-                <li>Fund Name</li>
-                <li>Fee Category</li>
-                <li>Withdraw Dividends? — Yes/No</li>
-                <li>Agent Name</li>
-            </ul>
-        </div>
-
-        <div class="step-box">
-            <h2>Step 9: Bank Details</h2>
-            <p>You may choose to provide bank details now or later:</p>
-            <div class="highlight">
-                <strong>If Yes:</strong> Enter bank name, branch, currency, account number, and account type.<br>
-                <strong>If No:</strong> You can continue, but withdrawals won't be available without bank details.
+            <div class="hero-doc-intro">
+                <p>
+                    <span class="highlight">Unit Master</span> is a comprehensive front-to-back financial operations
+                    and capital markets platform designed for asset managers and investment institutions.
+                    This guide focuses on one key task: <span class="highlight">registering a new Single Member</span>.
+                    Follow the steps below in order, and you will be able to capture accurate member data,
+                    meet compliance requirements, and prepare accounts for contributions and withdrawals.
+                </p>
             </div>
         </div>
+    </header>
 
-        <div class="step-box">
-            <h2>Step 10: Complete Registration</h2>
-            <p>Click <strong>Finish</strong> to complete the registration. Missing or incorrect fields will be highlighted in red.</p>
+    <!-- MAIN DOCUMENT -->
+    <main>
+        <div class="doc-wrapper">
+            <div class="doc-meta">
+                <div class="meta-pill">
+                    <i class="far fa-file-alt"></i>
+                    New Member Registration – Single Members
+                </div>
+                <div class="meta-pill">
+                    <i class="far fa-clock"></i>
+                    Approx. completion time: 3–5 minutes
+                </div>
+                <div class="meta-pill">
+                    <i class="fas fa-user-shield"></i>
+                    Data capture and compliance
+                </div>
+            </div>
+
+            <!-- 1 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">1</div>
+                    <h2 class="doc-section-title">
+                        Getting started: opening the “Add New Member” page
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Begin by logging into Unit Master with your username and password. When the main dashboard
+                        opens, look at the left-hand navigation and click <strong>Members</strong>.
+                        This brings you to the members area where you can see existing records.
+                    </p>
+                    <p>
+                        To capture a new person, click the button labelled
+                        <strong>Add a New Member</strong>. The system will open the registration wizard and guide you
+                        through the process step by step.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">2</div>
+                    <h2 class="doc-section-title">
+                        Choosing the correct member type
+                        <span class="badge">Single Member</span>
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        At the top of the form, locate the field called <strong>Member Type</strong>.
+                        Open the drop-down list and select <strong>Single Member</strong> whenever you are registering
+                        an individual who is joining in their own name and not as part of a joint account,
+                        company or group.
+                    </p>
+                    <p>
+                        Selecting the correct type ensures that the system shows the right set of fields and rules
+                        for this member.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">3</div>
+                    <h2 class="doc-section-title">
+                        Capturing personal details
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Complete the <strong>Personal Details</strong> section carefully. You will be asked for:
+                    </p>
+                    <ul>
+                        <li><strong>Salutation</strong> (for example, Mr, Mrs, Ms)</li>
+                        <li><strong>First Name</strong> and <strong>Surname</strong></li>
+                        <li><strong>Date of Birth</strong>, selected from the calendar control</li>
+                        <li><strong>Gender</strong></li>
+                        <li><strong>Country of Birth</strong></li>
+                        <li><strong>Marital Status</strong> such as Single or Married</li>
+                    </ul>
+                    <p>
+                        These fields uniquely identify the member and are often required for regulatory and reporting
+                        purposes, so check spelling and dates before moving on.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">4</div>
+                    <h2 class="doc-section-title">
+                        Adding contact information
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        In the <strong>Contact Details</strong> section, provide clear and up-to-date information so that
+                        statements and notifications reach the member:
+                    </p>
+                    <ul>
+                        <li><strong>District</strong> or area of residence</li>
+                        <li><strong>Telephone Number</strong> and <strong>Mobile Phone Number</strong></li>
+                        <li><strong>Email Address</strong> for digital communication</li>
+                        <li><strong>Physical Address</strong> including street, town or village</li>
+                        <li>
+                            <strong>Receive Statement Via</strong>, indicating whether the member prefers
+                            statements by email or post
+                        </li>
+                    </ul>
+                    <p>
+                        Double-check all phone numbers and email addresses to reduce the risk of failed deliveries.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 5 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">5</div>
+                    <h2 class="doc-section-title">
+                        Recording next of kin details
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Every member should have at least one <strong>Next of Kin</strong> on file. Capture:
+                    </p>
+                    <ul>
+                        <li>The next of kin’s <strong>Full Name</strong></li>
+                        <li>The <strong>Relationship</strong> to the member, for example Father, Spouse or Sister</li>
+                        <li>A reliable <strong>Phone Number</strong></li>
+                    </ul>
+                    <p>
+                        This contact can be used for emergencies or important account matters where the institution
+                        needs to reach someone on the member’s behalf.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 6 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">6</div>
+                    <h2 class="doc-section-title">
+                        Completing statutory details
+                        <span class="badge">Compliance</span>
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        The <strong>Statutory Details</strong> panel supports KYC and regulatory requirements.
+                        Provide honest and complete answers for:
+                    </p>
+                    <ul>
+                        <li><strong>Is Client Resident</strong> – choose Yes or No</li>
+                        <li><strong>Tax PIN / TIN</strong> – the member’s registered tax number</li>
+                        <li><strong>Income Range</strong> – select the most suitable bracket</li>
+                        <li><strong>Adverse Media Screening Done</strong> – confirm whether checks have been completed</li>
+                    </ul>
+                    <p>
+                        Accurate statutory information protects both the member and the institution and may be
+                        required for audits.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 7 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">7</div>
+                    <h2 class="doc-section-title">
+                        Employment details (when applicable)
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        If you indicate that the client <strong>is employed</strong>, additional employment fields will
+                        appear. Capture information such as the member’s occupation and employer details as requested.
+                    </p>
+                    <p>
+                        These data points can later be used for risk assessment and loan evaluation. If the member is
+                        not employed, simply leave this option set to No and proceed to the next step.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 8 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">8</div>
+                    <h2 class="doc-section-title">
+                        Setting up account details
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Under <strong>Account Details</strong>, you configure how the member participates in the fund:
+                    </p>
+                    <ul>
+                        <li>Select the <strong>Fund Name</strong> the member is joining</li>
+                        <li>Choose the appropriate <strong>Fee Category</strong></li>
+                        <li>Indicate whether the member will <strong>Withdraw Dividends</strong></li>
+                        <li>Assign an <strong>Agent Name</strong> responsible for the account</li>
+                    </ul>
+                    <p>
+                        These settings control fees, income distribution and relationship management, so always confirm
+                        them with the member before saving.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 9 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">9</div>
+                    <h2 class="doc-section-title">
+                        Providing bank information
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Decide whether to capture <strong>Bank Details</strong> now. If you select <strong>Yes</strong>,
+                        the form will ask for:
+                    </p>
+                    <ul>
+                        <li><strong>Bank Name</strong> and <strong>Branch</strong></li>
+                        <li><strong>Currency</strong> of the bank account</li>
+                        <li><strong>Account Number</strong></li>
+                        <li><strong>Account Type</strong>, such as Savings or Current</li>
+                    </ul>
+                    <p>
+                        If you choose <strong>No</strong>, these fields can be captured later, but note that
+                        <strong>withdrawals cannot be processed</strong> until valid bank details are on record.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 10 -->
+            <section class="doc-section">
+                <div class="doc-section-header">
+                    <div class="doc-step-number">10</div>
+                    <h2 class="doc-section-title">
+                        Reviewing and completing the registration
+                        <span class="badge">Finish</span>
+                    </h2>
+                </div>
+                <div class="doc-section-body">
+                    <p>
+                        Before you submit the form, take a moment to review each section for spelling errors,
+                        missing fields or incorrect selections. When you are satisfied, click
+                        <strong>Finish</strong> to complete the registration.
+                    </p>
+                    <p>
+                        The system automatically validates the data. Any missing or invalid fields will be highlighted in
+                        red so that you can correct them immediately. Once validation passes, the new member is added
+                        to the members list and is ready for contributions, investments and other transactions.
+                    </p>
+                </div>
+            </section>
         </div>
+    </main>
+</div>
 
-        <p style="text-align:center; margin-top:30px; font-size:14px; color:#555;">End of Single Member Registration Guide</p>
-    </div>
+<script>
+    // Simple scroll reveal for sections
+    const sections = document.querySelectorAll(".doc-section");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.25 });
+
+    sections.forEach(section => observer.observe(section));
+</script>
 </body>
 </html>

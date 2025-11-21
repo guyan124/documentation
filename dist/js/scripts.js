@@ -1,43 +1,23 @@
 /*!
-    * Start Bootstrap - SB Admin v7.0.7 (https://startbootstrap.com/template/sb-admin)
-    * Copyright 2013-2023 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
-    */
-    //
-// Scripts
-//
-
-window.addEventListener('DOMContentLoaded', event => {
-
-    // Toggle the side navigation
-    const sidebarToggle = document.body.querySelector('#sidebarToggle');
-    if (sidebarToggle) {
-        // Uncomment Below to persist sidebar toggle between refreshes
-        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-        //     document.body.classList.toggle('sb-sidenav-toggled');
-        // }
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-        });
-    }
-
-});
-
-/*!
  * Start Bootstrap - SB Admin
  */
 
 // Tout le JS s'exécute quand la page est chargée
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', () => {
 
     // =======================
     // 1. Toggle du side menu
     // =======================
-    const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    const sidebarToggle = document.querySelector('#sidebarToggle');
+
     if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', event => {
+        // remettre l'état sauvegardé (optionnel)
+        const stored = localStorage.getItem('sb|sidebar-toggle') === 'true';
+        if (stored) {
+            document.body.classList.add('sb-sidenav-toggled');
+        }
+
+        sidebarToggle.addEventListener('click', (event) => {
             event.preventDefault();
             document.body.classList.toggle('sb-sidenav-toggled');
             localStorage.setItem(
@@ -47,18 +27,18 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
-
-
-
+    // =======================
+    // 2. Barre de recherche
+    // =======================
     const searchInput  = document.querySelector(
         'form .form-control[placeholder="Search for..."]'
     );
     const searchButton = document.getElementById('btnNavbarSearch');
 
-
+    // L’iframe qui affiche le contenu
     const iframe = document.querySelector('iframe[name="mainFrame"]');
 
-
+    // Tous les liens qui chargent des pages dans l’iframe
     const navLinks = document.querySelectorAll(
         '#sidenavAccordion a.nav-link[target="mainFrame"]'
     );
@@ -81,11 +61,11 @@ window.addEventListener('DOMContentLoaded', event => {
         if (matchedLink) {
             const url = matchedLink.getAttribute('href');
 
-
+            // On charge la page trouvée dans l’iframe
             if (iframe) {
                 iframe.src = url;
             } else {
-
+                // fallback si un jour tu enlèves l’iframe
                 window.location.href = url;
             }
         } else {
@@ -94,19 +74,64 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
     if (searchButton && searchInput) {
-
-        searchButton.addEventListener('click', function (e) {
+        searchButton.addEventListener('click', (e) => {
             e.preventDefault();
             performSearch();
         });
 
-
-        searchInput.addEventListener('keyup', function (e) {
+        searchInput.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 performSearch();
             }
         });
     }
-
 });
+
+
+    // ============================
+    // 3. Panneau sous-menu en mode mini
+    // ============================
+    const miniPanel = document.getElementById('miniSubmenuPanel');
+
+    // liens qui ouvrent un sous-menu (ceux avec data-bs-toggle="collapse")
+    const parentLinks = document.querySelectorAll(
+        '#sidenavAccordion a.nav-link[data-bs-toggle="collapse"]'
+    );
+
+    parentLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            // On ne fait ce comportement QUE si la sidebar est en mode mini
+            if (!document.body.classList.contains('sb-sidenav-toggled')) {
+                return; // mode normal → Bootstrap gère
+            }
+
+            e.preventDefault();
+
+            const target = this.getAttribute('data-bs-target'); // ex: "#collapseLayouts"
+            const collapseEl = document.querySelector(target);
+
+            if (!collapseEl) return;
+
+            // On prend le contenu du sous-menu (les liens internes)
+            const nestedNav = collapseEl.querySelector('.sb-sidenav-menu-nested');
+            if (!nestedNav) return;
+
+            // On met ce contenu dans le panneau
+            miniPanel.innerHTML = nestedNav.innerHTML;
+            miniPanel.classList.add('show');
+        });
+    });
+
+    // Fermer le panneau quand on clique en dehors
+    document.addEventListener('click', function (e) {
+        if (!miniPanel.classList.contains('show')) return;
+
+        const clickedInsideSidebar =
+            e.target.closest('#layoutSidenav_nav') ||
+            e.target.closest('#miniSubmenuPanel');
+
+        if (!clickedInsideSidebar) {
+            miniPanel.classList.remove('show');
+        }
+    });

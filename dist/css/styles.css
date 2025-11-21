@@ -11278,3 +11278,56 @@ body.sb-nav-fixed {
     border: none;
     display: block;
 }
+
+
+/* ====== MINI SIDEBAR QUAND ON CLIQUE SUR LE BOUTON ====== */
+
+/* Largeur normale du menu */
+#layoutSidenav #layoutSidenav_nav {
+    width: 225px;
+    transform: translateX(0);
+}
+
+/* Quand le body a la classe sb-sidenav-toggled :
+   -> garder une petite barre à gauche pour les icônes
+*/
+body.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+    transform: none;          /* on annule le slide vers la gauche */
+    width: 4.5rem;            /* petite largeur pour les icônes */
+}
+
+/* Le contenu principal doit commencer après cette petite barre */
+body.sb-nav-fixed.sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
+    margin-left: 4.5rem;
+}
+
+/* Cacher les titres de sections ("Core", "Interface", etc.)
+   quand le menu est réduit */
+body.sb-sidenav-toggled .sb-sidenav-menu-heading {
+    display: none;
+}
+
+/* Cacher le texte des liens, garder seulement l’icône */
+body.sb-sidenav-toggled .sb-sidenav .nav-link {
+    font-size: 0;               /* on masque le texte */
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    text-align: center;
+}
+
+/* Re-afficher l’icône avec une taille normale */
+body.sb-sidenav-toggled .sb-sidenav .nav-link .sb-nav-link-icon {
+    font-size: 1.1rem;
+    margin-right: 0;            /* plus d’espace pour du texte */
+}
+
+/* Cacher les petites flèches des menus déroulants quand c'est réduit */
+body.sb-sidenav-toggled .sb-sidenav .sb-sidenav-collapse-arrow {
+    display: none;
+}
+
+/* Footer mini dans la sidebar réduite */
+body.sb-sidenav-toggled .sb-sidenav-footer {
+    font-size: 0.7rem;
+    text-align: center;
+}
