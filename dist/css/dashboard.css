@@ -9,18 +9,22 @@
   --max-sidew: 300px;
 }
 
+/* Reset de base */
 *{
   box-sizing:border-box;
 }
 
-html,body{
-  height:100%;
+html,
+body{
+  /* pas de height:100 ici */
+  min-height:100%;
   margin:0;
   font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
   color:#0f172a;
   background:linear-gradient(180deg,var(--bg),#eef6ff);
 }
 
+/* Liens */
 a{
   color:var(--accent);
   text-decoration:none;
@@ -43,7 +47,7 @@ a{
   }
 }
 
-/* Carte principale */
+/* Cartes */
 .card{
   background:var(--card);
   border-radius:var(--radius);
@@ -82,7 +86,7 @@ p.lead{
   font-size:14px;
 }
 
-/* Contenu */
+/* Contenu texte */
 .content{
   padding:4px 2px;
 }
@@ -126,7 +130,7 @@ section p{
   color:#0f172a;
 }
 
-/* ===== ACCORDION (sections déroulantes) ===== */
+/* ACCORDION */
 details.accordion{
   border-radius:10px;
   background:#f9fbff;
@@ -178,11 +182,38 @@ details.accordion[open] summary::after{
   color:#111827;
 }
 
-/* ===== SIDEBAR ===== */
+/* Images des étapes */
+.step-inline{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  margin:10px 0;
+  flex-wrap:wrap;
+}
+
+.step-inline img{
+  max-width:260px;
+  height:auto;
+  border-radius:8px;
+  box-shadow:0 4px 16px rgba(15,23,42,0.12);
+}
+
+.step-image{
+  margin:10px 0;
+  text-align:center;
+}
+
+.step-image img{
+  max-width:100%;
+  height:auto;
+  border-radius:8px;
+  box-shadow:0 4px 16px rgba(15,23,42,0.12);
+}
+
+/* SIDEBAR TABLE OF CONTENTS */
+/* Important: plus de position sticky ici, sidebar normale */
 aside{
-  position:sticky;
-  top:28px;
-  height:max-content;
+  margin-top:16px;
 }
 
 .toc-title{
@@ -209,6 +240,11 @@ aside{
   color:var(--accent);
 }
 
+.toc a:hover{
+  background:#eef6ff;
+}
+
+/* Petit texte bas de carte */
 footer.small{
   margin-top:12px;
   font-size:13px;
@@ -228,8 +264,16 @@ footer.small{
 
 /* Impression */
 @media print{
-  body{background:white;}
-  aside{display:none;}
-  .wrap{max-width:100%;}
-  .card{box-shadow:none;}
+  body{
+    background:white;
+  }
+  aside{
+    display:none;
+  }
+  .wrap{
+    max-width:100%;
+  }
+  .card{
+    box-shadow:none;
+  }
 }

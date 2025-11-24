@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unit Master  Single Member Registration</title>
+  <title>Unit Master – Single Member Registration</title>
   <meta name="description" content="Step by step guide for registering a new single member in Unit Master." />
 
-
+  <!-- Même fichier CSS que pour dashboard -->
   <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body>
   <div class="wrap">
+    <!-- CONTENU PRINCIPAL -->
     <main class="card">
       <header class="doc">
         <div class="brand">UM</div>
@@ -53,59 +54,66 @@
           <div class="accordion-body">
             <p>
               1. Log into the application and click on <strong>Members</strong> in the left sidebar.
-            <div class="step-inline">
-             <img src="assets/img/single.png" alt="left sidebar for single" width="260px">
-            <p>
-            2. Click on the <strong>Add a new member</strong> button to begin the registration process.
-            <img src="assets/img/add member.png" alt="left sidebar for single" width="260px">
             </p>
-            </div>
 
+            <figure class="step-image">
+              <img src="assets/img/single.png"
+                   alt="Members menu in left sidebar" />
+            </figure>
+
+            <p>
+              2. Click on the <strong>Add a new member</strong> button to begin the registration process.
             </p>
+
+            <figure class="step-image">
+              <img src="assets/img/add member.png"
+                   alt="Add a new member button" />
+            </figure>
           </div>
         </details>
 
         <!-- STEP 2 -->
-            <details id="step2" class="accordion">
-         <summary>Step 2: Choosing the Member Type</summary>
-        <div class="accordion-body">
+        <details id="step2" class="accordion">
+          <summary>Step 2: Choosing the Member Type</summary>
+          <div class="accordion-body">
             <p>
-            After clicking <strong>Add a new member</strong>, a dropdown menu appears. Choose
+              After clicking <strong>Add a new member</strong>, a dropdown menu appears. Choose:
             </p>
 
             <div class="step-inline">
-            <img src="assets/img/add single.png" alt="Add a new member dropdown" class="step-image" height="160px">
-            <p>
-            <strong>Single Member</strong> when the person is registering as an individual
-            (not a joint or institutional account).
-            </p>
+              <figure class="step-image">
+                <img src="assets/img/add single.png"
+                     alt="Add a new member dropdown" />
+              </figure>
+              <p>
+                <strong>Single Member</strong> when the person is registering as an individual
+                (not a joint or institutional account).
+              </p>
             </div>
-        </div>
+          </div>
         </details>
 
+        <!-- STEP 3 -->
+        <details id="step3" class="accordion">
+          <summary>Step 3: Filling in Personal Details</summary>
+          <div class="accordion-body">
+            <p>Enter the basic personal details for the member:</p>
 
-             <!-- STEP 3 -->
-            <details id="step3" class="accordion">
-            <summary>Step 3: Filling in Personal Details</summary>
-            <div class="accordion-body">
-                <p>Enter the basic personal details for the member:</p>
+            <figure class="step-image">
+              <img src="assets/img/single form.png" alt="Single member personal details form" height="360px" width="560px "/>
+            </figure>
 
-                <figure class="step-image">
-                <img src="assets/img/single form.png" alt="Single member personal details form" width="560px" height="260px">
-                </figure>
-
-                <ul class="clean">
-                <li><strong>Salutation</strong>  Select from the dropdown (for example Mr., Mrs., Ms.).</li>
-                <li><strong>First Name</strong>  Enter the first name.</li>
-                <li><strong>Surname</strong>  Enter the last name.</li>
-                <li><strong>Date of Birth</strong>  Select the date of birth from the calendar.</li>
-                <li><strong>Gender</strong>  Choose the appropriate option.</li>
-                <li><strong>Country of Birth</strong>  Select the country.</li>
-                <li><strong>Marital Status</strong>  Select <em>Single</em>, <em>Married</em>, or <em>Other</em>.</li>
-                </ul>
-            </div>
-            </details>
-
+            <ul class="clean">
+              <li><strong>Salutation</strong>  Select from the dropdown (for example Mr., Mrs., Ms.).</li>
+              <li><strong>First Name</strong>  Enter the first name.</li>
+              <li><strong>Surname</strong>  Enter the last name.</li>
+              <li><strong>Date of Birth</strong>  Select the date of birth from the calendar.</li>
+              <li><strong>Gender</strong>  Choose the appropriate option.</li>
+              <li><strong>Country of Birth</strong>  Select the country.</li>
+              <li><strong>Marital Status</strong>  Select <em>Single</em>, <em>Married</em>, or <em>Other</em>.</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- STEP 4 -->
         <details id="step4" class="accordion">
@@ -113,9 +121,11 @@
           <div class="accordion-body">
             <p>Capture the contact information so that the member can be reached easily:</p>
 
-             <figure class="step-image">
-                <img src="assets/img/contact details.png" alt="Single member personal details form" width="560px" height="260px">
-                </figure>
+            <figure class="step-image">
+              <img src="assets/img/contact details.png"
+                   alt="Contact details form" />
+            </figure>
+
             <ul class="clean">
               <li><strong>District</strong>  Select the district from the list.</li>
               <li><strong>Telephone No</strong>  Enter the landline number (if available).</li>
@@ -152,8 +162,8 @@
               <li><strong>Tax PIN</strong>  Enter the Tax Identification Number (TIN).</li>
               <li><strong>Income Range</strong>  Choose the member's income range.</li>
               <li>
-                <strong>Has Adverse Media Screening Been Done?</strong>  Select <em>Yes</em> or <em>No</em>. Screening
-                helps identify any negative media related to the client.
+                <strong>Has Adverse Media Screening Been Done?</strong>
+                Select <em>Yes</em> or <em>No</em>. Screening helps identify any negative media related to the client.
               </li>
             </ul>
           </div>
@@ -190,7 +200,7 @@
               <li><strong>Withdraw Dividends?</strong>  Select <em>Yes</em> if dividends are paid out, or <em>No</em> if they are reinvested.</li>
               <li><strong>Agent Name</strong>  Select the agent responsible for this account, if applicable.</li>
             </ul>
-          </div
+          </div>
         </details>
 
         <!-- STEP 9 -->
@@ -230,7 +240,7 @@
       </div>
     </main>
 
-    <!-- TABLE OF CONTENTS
+    <!-- TABLE OF CONTENTS -->
     <aside class="card" aria-label="Table of contents">
       <div>
         <div class="toc-title">
@@ -239,21 +249,19 @@
         <ul class="toc">
           <li><a href="#overview">Overview</a></li>
           <li><a href="#single-intro">How to Add a Single Member</a></li>
-          <li><a href="#step1">Step 1  Access page</a></li>
-          <li><a href="#step2">Step 2  Member type</a></li>
-          <li><a href="#step3">Step 3  Personal details</a></li>
-          <li><a href="#step4">Step 4  Contact details</a></li>
-          <li><a href="#step5">Step 5  Next of kin</a></li>
-          <li><a href="#step6">Step 6  Statutory</a></li>
-          <li><a href="#step7">Step 7  Employment</a></li>
-          <li><a href="#step8">Step 8  Account details</a></li>
-          <li><a href="#step9">Step 9  Bank details</a></li>
-          <li><a href="#step10">Step 10 Finish</a></li>
+          <li><a href="#step1">Step 1 – Access page</a></li>
+          <li><a href="#step2">Step 2 – Member type</a></li>
+          <li><a href="#step3">Step 3 – Personal details</a></li>
+          <li><a href="#step4">Step 4 – Contact details</a></li>
+          <li><a href="#step5">Step 5 – Next of kin</a></li>
+          <li><a href="#step6">Step 6 – Statutory</a></li>
+          <li><a href="#step7">Step 7 – Employment</a></li>
+          <li><a href="#step8">Step 8 – Account details</a></li>
+          <li><a href="#step9">Step 9 – Bank details</a></li>
+          <li><a href="#step10">Step 10 – Finish</a></li>
         </ul>
       </div>
-    </aside> -->
+    </aside>
   </div>
 </body>
 </html>
-
-

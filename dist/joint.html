@@ -1,801 +1,316 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>How to Add a New Joint Member</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unit Master - Joint Member Registration</title>
+  <meta name="description" content="Step by step guide for registering a new joint member in Unit Master." />
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            background: #f4f6fb;
-            color: #0f172a;
-        }
-
-        .app-shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Top hero section */
-        .hero {
-            background: linear-gradient(90deg, #0f5fd6, #1d4ed8);
-            color: #ffffff;
-            padding: 32px 16px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, rgba(255,255,255,0.16) 0, transparent 60%);
-            top: -120px;
-            right: -80px;
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            font-size: 0.85rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            opacity: 0.85;
-            margin-bottom: 6px;
-        }
-
-        .hero-title {
-            font-size: clamp(1.9rem, 2.8vw, 2.4rem);
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-title i {
-            font-size: 1.5rem;
-        }
-
-        .hero-subtitle {
-            max-width: 680px;
-            font-size: 0.98rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .hero-subtitle b {
-            font-weight: 600;
-        }
-
-        .hero-meta {
-            margin-top: 18px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.82rem;
-            opacity: 0.9;
-        }
-
-        .meta-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
-            border-radius: 999px;
-            background: rgba(15,23,42,0.25);
-            backdrop-filter: blur(10px);
-        }
-
-        .meta-pill i {
-            font-size: 0.85rem;
-        }
-
-        /* Scroll indicator */
-        .progress-bar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 3px;
-            width: 0;
-            background: #2563eb;
-            z-index: 50;
-            transition: width 0.2s ease-out;
-        }
-
-        /* Main content wrapper */
-        .content-shell {
-            flex: 1;
-            padding: 24px 16px 40px;
-        }
-
-        .content-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* Controls row */
-        .controls-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .breadcrumb {
-            font-size: 0.8rem;
-            color: #6b7280;
-        }
-
-        .breadcrumb span {
-            color: #111827;
-            font-weight: 500;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 999px;
-            padding: 8px 14px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-        }
-
-        .btn-primary {
-            background: #1d4ed8;
-            color: #eef2ff;
-            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.25);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.33);
-            background: #1a45c5;
-        }
-
-        .btn-ghost {
-            background: white;
-            color: #1f2933;
-            border: 1px solid #d1d5db;
-        }
-
-        .btn-ghost:hover {
-            background: #eff6ff;
-        }
-
-        /* Step cards */
-        .step-card {
-            background: #eef4ff;
-            border-radius: 12px;
-            padding: 18px 20px 18px;
-            margin-bottom: 14px;
-            border: 1px solid #dbeafe;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(15, 23, 42, 0.03);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-        }
-
-        .step-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.16);
-            border-color: #1d4ed8;
-        }
-
-        .step-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            gap: 8px;
-        }
-
-        .step-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #1d4ed8;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            color: #1d4ed8;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-        }
-
-        .step-toggle-icon {
-            font-size: 0.95rem;
-            color: #4b5563;
-            transition: transform 0.2s ease;
-        }
-
-        .step-card.expanded .step-toggle-icon {
-            transform: rotate(90deg);
-        }
-
-        .step-body {
-            margin-top: 12px;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #1f2937;
-            display: none;
-        }
-
-        .step-card.expanded .step-body {
-            display: block;
-        }
-
-        .step-body p {
-            margin-bottom: 8px;
-        }
-
-        .step-body ul {
-            list-style: disc;
-            margin-left: 1.4rem;
-            margin-top: 6px;
-        }
-
-        .step-body li {
-            margin-bottom: 4px;
-        }
-
-        .tip-box {
-            margin-top: 10px;
-            padding: 10px 12px;
-            border-radius: 10px;
-            background: #dbeafe;
-            font-size: 0.86rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            color: #1e3a8a;
-        }
-
-        .tip-box i {
-            margin-top: 2px;
-        }
-
-        /* Back to top */
-        .back-to-top {
-            position: fixed;
-            right: 16px;
-            bottom: 18px;
-            padding: 10px 12px;
-            border-radius: 999px;
-            border: none;
-            background: #1d4ed8;
-            color: white;
-            cursor: pointer;
-            display: none;
-            box-shadow: 0 8px 18px rgba(37,99,235,0.35);
-            font-size: 0.88rem;
-            align-items: center;
-            gap: 6px;
-            z-index: 40;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px rgba(37,99,235,0.45);
-            background: #1a45c5;
-        }
-
-        /* Small note at bottom */
-        .footer-note {
-            margin-top: 18px;
-            font-size: 0.78rem;
-            color: #6b7280;
-        }
-
-        .footer-note b {
-            font-weight: 600;
-            color: #111827;
-        }
-
-        @media (max-width: 640px) {
-            .hero {
-                padding: 24px 14px 30px;
-            }
-
-            .step-card {
-                padding: 16px 14px;
-            }
-
-            .step-title {
-                font-size: 1.02rem;
-            }
-
-            .hero-title {
-                font-size: 1.65rem;
-            }
-
-            .controls-row {
-                align-items: flex-start;
-            }
-        }
-    </style>
+  <!-- Same CSS as single member page -->
+  <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body>
-<div class="progress-bar" id="progressBar"></div>
+  <div class="wrap">
+    <!-- MAIN CONTENT -->
+    <main class="card">
+      <header class="doc">
+        <div class="brand">UM</div>
+        <div>
+          <h1>Joint Member Registration Guide</h1>
+          <p class="lead">
+            Step by step instructions for adding a joint member in Unit Master.
+          </p>
+        </div>
+      </header>
 
-<div class="app-shell">
-    <!-- Hero -->
-    <header class="hero">
-        <div class="hero-inner">
-            <div class="hero-eyebrow">UnitMaster Help Centre</div>
-            <h1 class="hero-title">
-                <i class="fa-solid fa-user-group"></i>
-                How to Add a New Joint Member
-            </h1>
-            <p class="hero-subtitle">
-                Welcome to the <b>Joint Member Registration Guide</b>. This page walks you through each step for
-                registering a <b>Joint Member account</b> in the system. Read the short instructions under every step
-                and you will be able to complete the registration with confidence.
+      <div class="content">
+        <!-- INTRO -->
+        <section id="overview">
+          <h2>How to Add a New Joint Member</h2>
+          <p>
+            Welcome to the New Member Registration Guide. This guide will help you register a
+            <strong>Joint Member</strong> in the system. Follow each step carefully to complete the
+            registration successfully.
+          </p>
+          <p>
+            The process is similar to the Single Member registration but includes some specific
+            fields for joint accounts.
+          </p>
+        </section>
+
+        <section id="joint-intro">
+          <h2>1. Overview of Joint Member Registration</h2>
+          <p>
+            Joint members share ownership of the same account. All key details must be captured
+            correctly for each party so that instructions and mandates are clear and compliant.
+          </p>
+        </section>
+
+        <!-- STEP 1 -->
+        <details id="step1" class="accordion">
+          <summary>Step 1: Group or Joint Details</summary>
+          <div class="accordion-body">
+            <p>Start by capturing the details that describe the joint relationship:</p>
+            <ul class="clean">
+              <li>
+                <strong>Full Names of Joint Member(s)</strong>
+                Enter the full names of all members who will own the account.
+              </li>
+              <li>
+                <strong>Effective Date</strong>
+                Select the date on which the joint member agreement becomes effective.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- STEP 2 -->
+        <details id="step2" class="accordion">
+          <summary>Step 2: Contact Details</summary>
+          <div class="accordion-body">
+            <p>
+              Follow the same approach as for the Single Member, but make sure contact details are
+              correctly captured for the joint account setup.
             </p>
 
-            <div class="hero-meta">
-                <span class="meta-pill">
-                    <i class="fa-regular fa-clock"></i>
-                    5 – 7 minutes to complete
-                </span>
-                <span class="meta-pill">
-                    <i class="fa-solid fa-circle-info"></i>
-                    Best viewed on a desktop or tablet
-                </span>
-            </div>
-        </div>
-    </header>
+            <h3>1. Location Information</h3>
+            <ul class="clean">
+              <li><strong>Postal Address</strong> Mailing address used for correspondence.</li>
+              <li><strong>Postal Code</strong> Postal or ZIP code for mail delivery.</li>
+              <li><strong>Country of Residence</strong> Select the country of residence (required).</li>
+              <li><strong>District</strong> Administrative district or region (required).</li>
+              <li><strong>Town</strong> City or town of residence (required).</li>
+            </ul>
 
-    <!-- Main content -->
-    <main class="content-shell">
-        <div class="content-inner">
+            <h3>2. Contact Details</h3>
+            <ul class="clean">
+              <li><strong>Mobile Phone No</strong> Primary contact number with country code (required).</li>
+              <li><strong>Telephone No</strong> Alternative phone number (optional).</li>
+              <li><strong>Email Address</strong> Main email for account communications (required).</li>
+            </ul>
 
-            <div class="controls-row">
-                <div class="breadcrumb">
-                    Help &gt; Members &gt; <span>New Joint Member</span>
-                </div>
-                <div class="btn-group">
-                    <button id="expandAllBtn" class="btn btn-primary">
-                        <i class="fa-solid fa-plus"></i> Expand all steps
-                    </button>
-                    <button id="collapseAllBtn" class="btn btn-ghost">
-                        <i class="fa-solid fa-minus"></i> Collapse all
-                    </button>
-                </div>
-            </div>
+            <h3>3. Communication Preferences</h3>
+            <ul class="clean">
+              <li><strong>Accept SMS Notifications</strong> Choose whether to receive account alerts by SMS (required).</li>
+              <li><strong>Send SMS Queries</strong> Allow the service to send queries via SMS (required).</li>
+              <li>
+                <strong>Receive Statement Via</strong>
+                Choose between email (recommended and usually free) or postage mail (may attract a fee) (required).
+              </li>
+            </ul>
 
-            <!-- Step 1 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">1</span>
-                        Access the "Add New Member" Page
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Start by navigating to the Member Management area.
-                    </p>
-                    <ul>
-                        <li>Log into the application with your staff username and password.</li>
-                        <li>From the left sidebar, click <b>Members</b>.</li>
-                        <li>On the Members page, click the <b>Add a New Member</b> button.</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-lightbulb"></i>
-                        <span>
-                            If you do not see the <b>Add a New Member</b> button, you may not have the right access.
-                            Contact your system administrator for assistance.
-                        </span>
-                    </div>
-                </div>
-            </section>
+            <h3>4. Additional Information</h3>
+            <ul class="clean">
+              <li><strong>Physical Address</strong> Full street and house or building address (required).</li>
+              <li>
+                <strong>Account Mandate</strong>
+                Defines signing authority; choose how many people must or can sign for transactions
+                (required).
+              </li>
+            </ul>
 
-            <!-- Step 2 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">2</span>
-                        Choose the Member Type
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        On the first screen, you will be asked to choose what kind of member you are registering.
-                    </p>
-                    <ul>
-                        <li>Open the <b>Member Type</b> dropdown list.</li>
-                        <li>Select <b>Joint Member</b>.</li>
-                        <li>Click <b>Next</b> to move to the personal details section.</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-circle-question"></i>
-                        <span>
-                            Select <b>Joint Member</b> only when two individuals are sharing the same account.
-                            For single accounts, use the <b>Single Member</b> guide instead.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 3 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">3</span>
-                        Fill in Primary Member Personal Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Enter the details of the first person who will own the joint account (Primary Member).
-                    </p>
-                    <ul>
-                        <li>Salutation (Mr, Mrs, Ms, Dr, etc)</li>
-                        <li>First Name and Surname</li>
-                        <li>Date of Birth</li>
-                        <li>Gender</li>
-                        <li>Country of Birth</li>
-                        <li>Marital Status</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                        <span>
-                            Make sure names match the official ID or passport. This helps avoid issues when verifying
-                            the member later.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 4 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">4</span>
-                        Fill in Secondary Member Personal Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Next, capture the details of the second person on the account (Secondary Member).
-                    </p>
-                    <ul>
-                        <li>Salutation, First Name, and Surname</li>
-                        <li>Date of Birth and Gender</li>
-                        <li>Country of Birth</li>
-                        <li>Relationship to Primary Member (for example, spouse, sibling, business partner)</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-solid fa-user-check"></i>
-                        <span>
-                            The Secondary Member must also meet the eligibility requirements of the fund,
-                            including age and residency rules.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 5 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">5</span>
-                        Add Contact Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Provide at least one reliable way to reach the joint account holders.
-                    </p>
-                    <ul>
-                        <li>District / Town</li>
-                        <li>Telephone Number (landline, if available)</li>
-                        <li>Mobile Phone Number</li>
-                        <li>Email Address</li>
-                        <li>Physical / Postal Address</li>
-                        <li>Preferred statement delivery method: <b>Email</b> or <b>Post</b></li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-envelope"></i>
-                        <span>
-                            It is recommended to capture a shared email address that both members can access,
-                            especially for statements and important notices.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 6 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">6</span>
-                        Add Next of Kin Information
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        In case of an emergency, the Next of Kin will be used as a contact or for beneficiary updates.
-                    </p>
-                    <ul>
-                        <li>Full Name</li>
-                        <li>Relationship to the members</li>
-                        <li>Phone Number</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-solid fa-phone-volume"></i>
-                        <span>
-                            Always confirm the Next of Kin details with the members. This information should be kept
-                            up to date.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 7 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">7</span>
-                        Statutory Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Capture all regulatory requirements for both members.
-                    </p>
-                    <ul>
-                        <li>Is Client Resident — <b>Yes</b> or <b>No</b></li>
-                        <li>Tax PIN or equivalent number</li>
-                        <li>Income Range</li>
-                        <li>Adverse Media Screening Done — <b>Yes</b> or <b>No</b></li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>
-                            Statutory details help the institution comply with KYC and AML regulations.
-                            Complete them carefully to avoid delays in approval.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 8 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">8</span>
-                        Employment Details (If Applicable)
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        If either member is employed, additional sections will appear.
-                    </p>
-                    <ul>
-                        <li>Occupation / Job Title</li>
-                        <li>Name of Employer</li>
-                        <li>Employer Address</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-id-card"></i>
-                        <span>
-                            For self-employed members, capture the nature of their business instead of an employer name.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 9 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">9</span>
-                        Account Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Link the joint members to the correct fund and commission structure.
-                    </p>
-                    <ul>
-                        <li>Fund Name</li>
-                        <li>Fee Category</li>
-                        <li>Withdraw Dividends? — <b>Yes</b> or <b>No</b></li>
-                        <li>Agent Name (if the account was opened through an agent)</li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-solid fa-coins"></i>
-                        <span>
-                            Check with your supervisor if you are not sure which fee category to apply.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 10 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">10</span>
-                        Bank Details
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        You can capture bank information now or leave it for later.
-                    </p>
-                    <ul>
-                        <li><b>If Yes:</b> Enter bank name, branch, currency, account number, and account type.</li>
-                        <li><b>If No:</b> You can still proceed, but withdrawals will not be possible until
-                            bank details are added.
-                        </li>
-                    </ul>
-                    <div class="tip-box">
-                        <i class="fa-solid fa-building-columns"></i>
-                        <span>
-                            For joint accounts, ensure the bank account is also in joint names where required
-                            by your internal policy.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 11 -->
-            <section class="step-card expanded">
-                <div class="step-header">
-                    <h2 class="step-title">
-                        <span class="step-number">11</span>
-                        Complete Registration
-                    </h2>
-                    <i class="fa-solid fa-chevron-right step-toggle-icon"></i>
-                </div>
-                <div class="step-body">
-                    <p>
-                        Review all the information you have entered before saving.
-                    </p>
-                    <ul>
-                        <li>Confirm that both members’ names and ID details are correct.</li>
-                        <li>Check contact details, especially mobile number and email address.</li>
-                        <li>Click <b>Finish</b> to submit the registration.</li>
-                    </ul>
-                    <p>
-                        Any missing or incorrect fields will be highlighted in red. Correct the information and click
-                        <b>Finish</b> again.
-                    </p>
-                    <div class="tip-box">
-                        <i class="fa-regular fa-thumbs-up"></i>
-                        <span>
-                            After saving, you can always open the member profile later to edit or update information,
-                            depending on your user rights.
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <p class="footer-note">
-                <b>Need more help?</b> If you get stuck at any step, contact your supervisor or the support team.
-                Sharing a screenshot of the page will help them assist you faster.
+            <p class="note">
+              Fill in all required fields marked with a red asterisk. Choose email statements to
+              avoid postage charges. Use the "Next" button to move forward or "Previous" to go back
+              if needed.
             </p>
-        </div>
+          </div>
+        </details>
+
+        <!-- STEP 3 -->
+        <details id="step3" class="accordion">
+          <summary>Step 3: Statutory Details</summary>
+          <div class="accordion-body">
+            <p>
+              Statutory fields are used for compliance, tax, and regulatory reporting. Complete them
+              carefully.
+            </p>
+
+            <h3>1. Residency and Citizenship Status</h3>
+            <ul class="clean">
+              <li><strong>Is client resident?</strong> Select Yes or No to confirm residency status (required).</li>
+              <li><strong>Has dual citizenship?</strong> Indicate whether the member holds more than one citizenship (required).</li>
+              <li><strong>Is client a US citizen?</strong> Required for US tax reporting and FATCA checks (required).</li>
+            </ul>
+
+            <h3>2. Tax Information</h3>
+            <ul class="clean">
+              <li>
+                <strong>Tax No</strong> Enter the Tax Identification Number or PIN (for example a 9 digit PIN for Malawi)
+                (required).
+              </li>
+              <li><strong>Is client tax exempt?</strong> Select whether the client qualifies for tax exemption (required).</li>
+              <li>
+                <strong>Exempt Certificate Expiry Date</strong> If tax exempt, provide the certificate expiry date.
+              </li>
+            </ul>
+
+            <h3>3. Account Preferences</h3>
+            <ul class="clean">
+              <li>
+                <strong>Withdraw Monthly Interest?</strong> Choose whether monthly interest is withdrawn or left to
+                accumulate.
+              </li>
+            </ul>
+
+            <h3>4. Compliance Screening</h3>
+            <ul class="clean">
+              <li><strong>Has Adverse Media Screening Been Done?</strong> Confirm completion of screening (required).</li>
+              <li><strong>Screening Status</strong> Record whether the result is true (passed) or false (failed) (required).</li>
+              <li><strong>Is member a PEP?</strong> Indicate if the member is a Politically Exposed Person.</li>
+            </ul>
+
+            <h3>5. Document Processing Dates</h3>
+            <ul class="clean">
+              <li><strong>Client Sign-off Date</strong> Date when the client signed the physical documents (required).</li>
+              <li><strong>Admin Receipt Date</strong> Date when the admin team received the documents (required).</li>
+              <li><strong>Risk Assessment Date</strong> Date when the risk assessment was completed (required).</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- STEP 4 -->
+        <details id="step4" class="accordion">
+          <summary>Step 4: Account Details</summary>
+          <div class="accordion-body">
+            <p>
+              Link the joint member to the appropriate fund, fee structure and servicing agent, and
+              set account preferences.
+            </p>
+
+            <h3>1. Select Your Investment Fund</h3>
+            <ul class="clean">
+              <li>
+                Use the <strong>Fund Name</strong> dropdown to choose the fund (for example Money
+                Market Fund, Equity Fund, Bond Fund). Each fund has its own risk and return profile.
+              </li>
+            </ul>
+
+            <h3>2. Choose Fee Category</h3>
+            <ul class="clean">
+              <li>
+                Use the <strong>Fee Category</strong> dropdown to select the applicable fee
+                structure (for example retail, institutional, or premium). Different categories may
+                have different fee rates and minimums.
+              </li>
+            </ul>
+
+            <h3>3. Assign an Agent</h3>
+            <ul class="clean">
+              <li>
+                Use the <strong>Agent Name</strong> dropdown to choose the advisor or agent who
+                will manage the account. If there is no specific agent, select the default or branch
+                agent.
+              </li>
+            </ul>
+
+            <h3>4. Tax Display Preference</h3>
+            <ul class="clean">
+              <li>
+                <strong>Show Tax on Statement?</strong> Select Yes if you want tax deductions
+                displayed clearly on statements, or No if you prefer net figures only. Choosing Yes
+                is recommended for transparency.
+              </li>
+            </ul>
+
+            <h3>5. Dividend Withdrawal Option</h3>
+            <ul class="clean">
+              <li>
+                <strong>Withdraw Dividends?</strong> Select Yes to receive cash payouts, or No to
+                reinvest dividends automatically for compound growth.
+              </li>
+            </ul>
+
+            <h3>6. Additional Instructions</h3>
+            <ul class="clean">
+              <li>
+                Use the <strong>Note / Instructions</strong> field to capture any special
+                instructions, such as preferred contact rules or reporting frequency.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- STEP 5 -->
+        <details id="step5" class="accordion">
+          <summary>Step 5: Bank Details</summary>
+          <div class="accordion-body">
+            <p>
+              You can either provide bank details now or skip this step and add them later in
+              Settings.
+            </p>
+
+            <h3>1. Choose Your Option</h3>
+            <ul class="clean">
+              <li><strong>No - I want to provide bank details</strong> Continue and fill in the form.</li>
+              <li><strong>Yes - skip for now</strong> Finish registration and add bank details later.</li>
+            </ul>
+
+            <h3>2. Fill in Your Bank Information</h3>
+            <ul class="clean">
+              <li><strong>Bank Name</strong> Select the bank where the account is held (required).</li>
+              <li><strong>Bank Branch</strong> Select the specific branch for the account (required).</li>
+              <li>
+                <strong>Account Number</strong> Enter the full account number exactly as it appears
+                at the bank, using digits only (required).
+              </li>
+              <li>
+                <strong>Account Name</strong> Enter the exact account name as recorded by the bank
+                (required).
+              </li>
+              <li>
+                <strong>Currency</strong> Select the currency of the bank account (for example KES,
+                USD, EUR) (required).
+              </li>
+              <li>
+                <strong>Account Type</strong> Choose the account type (for example savings, current,
+                or other) (required).
+              </li>
+              <li>
+                <strong>Default Account</strong> Select Yes if this should be the primary account
+                for withdrawals and payments, or No if it is a secondary account (required).
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- FINISH NOTE -->
+        <details id="step6" class="accordion">
+          <summary>Finishing the Joint Member Registration</summary>
+          <div class="accordion-body">
+            <p>
+              After all required sections are completed, review the information carefully and then
+              click the <strong>Finish</strong> or <strong>Submit</strong> button in the
+              application.
+            </p>
+            <p class="note">
+              Accurate data at onboarding reduces corrections, compliance issues, and processing
+              delays later. Always confirm names, mandates, tax numbers, and bank details before
+              submitting.
+            </p>
+          </div>
+        </details>
+      </div>
     </main>
-</div>
 
-<!-- Back to top button -->
-<button class="back-to-top" id="backToTopBtn">
-    <i class="fa-solid fa-arrow-up"></i> Top
-</button>
-
-<script>
-    // Toggle step cards on header click
-    document.querySelectorAll(".step-card").forEach(function (card) {
-        const header = card.querySelector(".step-header");
-        header.addEventListener("click", function () {
-            card.classList.toggle("expanded");
-        });
-    });
-
-    // Expand / collapse all buttons
-    const expandAllBtn = document.getElementById("expandAllBtn");
-    const collapseAllBtn = document.getElementById("collapseAllBtn");
-
-    expandAllBtn.addEventListener("click", function () {
-        document.querySelectorAll(".step-card").forEach(function (card) {
-            card.classList.add("expanded");
-        });
-    });
-
-    collapseAllBtn.addEventListener("click", function () {
-        document.querySelectorAll(".step-card").forEach(function (card) {
-            card.classList.remove("expanded");
-        });
-    });
-
-    // Scroll progress bar
-    const progressBar = document.getElementById("progressBar");
-
-    window.addEventListener("scroll", function () {
-        const scrollTop = window.scrollY || window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = progress + "%";
-    });
-
-    // Back to top button
-    const backToTopBtn = document.getElementById("backToTopBtn");
-
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 220) {
-            backToTopBtn.style.display = "inline-flex";
-        } else {
-            backToTopBtn.style.display = "none";
-        }
-    });
-
-    backToTopBtn.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-</script>
+    <!-- TABLE OF CONTENTS -->
+    <aside class="card" aria-label="Table of contents">
+      <div>
+        <div class="toc-title">
+          On this page <span class="badge">Joint Member</span>
+        </div>
+        <ul class="toc">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#joint-intro">How to add a joint member</a></li>
+          <li><a href="#step1">Step 1 - Joint details</a></li>
+          <li><a href="#step2">Step 2 - Contact details</a></li>
+          <li><a href="#step3">Step 3 - Statutory details</a></li>
+          <li><a href="#step4">Step 4 - Account details</a></li>
+          <li><a href="#step5">Step 5 - Bank details</a></li>
+          <li><a href="#step6">Finish</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
 </body>
 </html>
