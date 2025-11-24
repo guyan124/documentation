@@ -11280,54 +11280,42 @@ body.sb-nav-fixed {
 }
 
 
-/* ====== MINI SIDEBAR QUAND ON CLIQUE SUR LE BOUTON ====== */
-
-/* Largeur normale du menu */
-#layoutSidenav #layoutSidenav_nav {
-    width: 225px;
-    transform: translateX(0);
+/* Iframe content area */
+.content-frame {
+    display: block;
+    width: 100%;
+    border: none;
+    min-height: calc(100vh - 120px);
 }
 
-/* Quand le body a la classe sb-sidenav-toggled :
-   -> garder une petite barre à gauche pour les icônes
-*/
-body.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
-    transform: none;          /* on annule le slide vers la gauche */
-    width: 4.5rem;            /* petite largeur pour les icônes */
+/* ===== One scrollbar: on ne scrolle que dans l'iframe, pas la page entière ===== */
+
+body.sb-nav-fixed {
+    overflow: hidden; /* Empêche le scroll sur le body */
 }
 
-/* Le contenu principal doit commencer après cette petite barre */
-body.sb-nav-fixed.sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
-    margin-left: 4.5rem;
+#layoutSidenav {
+    height: 100vh;
 }
 
-/* Cacher les titres de sections ("Core", "Interface", etc.)
-   quand le menu est réduit */
-body.sb-sidenav-toggled .sb-sidenav-menu-heading {
-    display: none;
+#layoutSidenav_content {
+    height: 100%;
+    overflow: hidden; /* Empêche un deuxième scrollbar ici */
 }
 
-/* Cacher le texte des liens, garder seulement l’icône */
-body.sb-sidenav-toggled .sb-sidenav .nav-link {
-    font-size: 0;               /* on masque le texte */
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    text-align: center;
+/* L'iframe occupe tout l'espace disponible dans la zone content */
+.content-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
 }
 
-/* Re-afficher l’icône avec une taille normale */
-body.sb-sidenav-toggled .sb-sidenav .nav-link .sb-nav-link-icon {
-    font-size: 1.1rem;
-    margin-right: 0;            /* plus d’espace pour du texte */
-}
-
-/* Cacher les petites flèches des menus déroulants quand c'est réduit */
-body.sb-sidenav-toggled .sb-sidenav .sb-sidenav-collapse-arrow {
-    display: none;
-}
-
-/* Footer mini dans la sidebar réduite */
-body.sb-sidenav-toggled .sb-sidenav-footer {
-    font-size: 0.7rem;
-    text-align: center;
+/* Fix iframe */
+.content-frame {
+    width: 100%;
+    height: 100vh;     /* prend toute la hauteur */
+    border: none;
+    display: block;
+    background: white;
 }

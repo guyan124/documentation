@@ -1,470 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Unit Master</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Unit Master Documentation Dashboard" />
+    <meta name="author" content="Unit Master" />
+    <title>Unit Master - Dashboard</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <!-- SB Admin CSS -->
+    <link href="css/styles.css" rel="stylesheet" />
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            background-color: #f4f5f7;
-            color: #111827;
-        }
-
-        .app-shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Top banner */
-
-        .hero {
-            background: linear-gradient(90deg, rgb(41, 23, 61), rgb(50, 31, 72));
-            padding: 3.5rem 6vw 3rem;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
-            font-weight: 700;
-            letter-spacing: 0.03em;
-            position: relative;
-            display: inline-block;
-            transition: transform 0.25s ease, text-shadow 0.25s ease;
-        }
-.hero p:hover{
-    font-size: medium;
-    transform: translateY(-4px) scale(1.02);
-    transition: transform 0.25s ease, text-shadow 0.25s ease;
-}
-.hero p :hover{
-     transform: translateY(-4px) scale(1.02);
-    text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-    font-size: medium;
-
-}
-
-
-        .hero h1:hover {
-            transform: translateY(-4px) scale(1.02);
-            text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Layout */
-
-        .layout {
-            display: grid;
-            grid-template-columns: 280px minmax(0, 1fr);
-            gap: 2.5rem;
-            padding: 2.5rem 6vw 3rem;
-        }
-
-        /* Sidebar */
-
-        .sidebar {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 1.75rem 1.5rem;
-            box-shadow: 0 0 0 1px #e5e7eb, 0 16px 30px rgba(15, 23, 42, 0.08);
-            align-self: flex-start;
-            position: sticky;
-            top: 1.5rem;
-        }
-
-        .sidebar-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .nav-section-btn {
-            width: 100%;
-            border: none;
-            background: transparent;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #111827;
-            padding: 0.6rem 0.4rem;
-            cursor: pointer;
-        }
-
-        .nav-section-btn i {
-            font-size: 0.8rem;
-            transition: transform 0.2s ease;
-        }
-
-        .nav-section-btn.section-closed i {
-            transform: rotate(-90deg);
-        }
-
-        .nav-section {
-            list-style: none;
-            margin-top: 0.4rem;
-            max-height: 1000px;
-            overflow: hidden;
-            transition: max-height 0.25s ease;
-        }
-
-        .nav-section-closed {
-            max-height: 0;
-        }
-
-        .nav-item {
-            font-size: 0.9rem;
-            padding: 0.5rem 0.4rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            color: #4b5563;
-            transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
-        }
-
-        .nav-item:hover {
-            background-color: #f3f4f6;
-            color: #111827;
-            transform: translateX(3px);
-        }
-
-        .nav-item.active {
-            background-color: #eef2ff;
-            color: #4f46e5;
-            font-weight: 600;
-        }
-
-        /* Main content */
-
-        .content {
-            max-width: 900px;
-        }
-
-        .lead {
-            background-color: #ffffff;
-            padding: 1.75rem 2rem;
-            border-radius: 0.9rem;
-            box-shadow: 0 0 0 1px #e5e7eb, 0 16px 30px rgba(15, 23, 42, 0.06);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-size: 0.98rem;
-            color: #374151;
-        }
-
-        .lead p + p {
-            margin-top: 0.9rem;
-        }
-
-        /* Cards */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.75rem;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 0.9rem;
-            padding: 1.6rem 1.5rem;
-            box-shadow: 0 0 0 1px #e5e7eb, 0 14px 25px rgba(15, 23, 42, 0.06);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 0.75rem;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-            border: 1px solid transparent;
-            aspect-ratio: 1 / 1; /* make cards square */
-        }
-
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
-            border-color: #4f46e5;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .card-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e5e7eb;
-            background-color: #eef2ff;
-            color: #4f46e5;
-            font-size: 1.1rem;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-        }
-
-        .card h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #111827;
-            position: relative;
-            transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #4b5563;
-            line-height: 1.7;
-        }
-
-        .card:hover h3 {
-            color: #4f46e5;
-            text-shadow: 0 6px 16px rgba(79, 70, 229, 0.5);
-            transform: translateY(-1px);
-        }
-
-        .card:hover .card-icon {
-            transform: translateY(-2px) scale(1.05);
-            background-color: #4f46e5;
-            color: #ffffff;
-            box-shadow: 0 12px 20px rgba(79, 70, 229, 0.35);
-        }
-
-        /* Pop animation when card is focused via menu */
-
-        @keyframes cardPop {
-            0%   { transform: scale(1); }
-            40%  { transform: scale(1.04); }
-            100% { transform: scale(1); }
-        }
-
-        .card-pop {
-            animation: cardPop 0.35s ease-out;
-        }
-
-        /* Responsive */
-
-        @media (max-width: 960px) {
-            .layout {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .sidebar {
-                position: static;
-                order: 2;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero {
-                padding: 2.5rem 1.5rem 2rem;
-            }
-
-            .layout {
-                padding: 1.5rem;
-            }
-
-            .lead {
-                padding: 1.4rem 1.3rem;
-            }
-
-            .card {
-                padding: 1.4rem 1.3rem;
-            }
-        }
-    </style>
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
-<body>
-<div class="app-shell">
+<body class="sb-nav-fixed">
+    <!-- TOP NAVBAR -->
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-    <!-- Top banner -->
-    <header class="hero">
-        <h1>Welcome to Unit Master</h1>
-        <p>Introduction to unit master</p>
-    </header>
+        <!-- Navbar Brand -->
+        <a class="navbar-brand ps-3" href="#">
+            Unit Master
+        </a>
 
-    <!-- Main layout -->
-    <div class="layout">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2 class="sidebar-title">Unit Master</h2>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
 
-            <nav class="sidebar-nav">
-                <button class="nav-section-btn">
-                    <span>Introduction</span>
-                    <i class="fa-solid fa-chevron-down"></i>
+        <!-- Search form -->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Search for..."
+                    aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch"
+                />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button">
+                    <i class="fas fa-search"></i>
                 </button>
+            </div>
+        </form>
 
-                <ul class="nav-section nav-section-open">
-                    <li class="nav-item active" data-target="overview-card">Overview</li>
-                    <li class="nav-item" data-target="transactions-card">Transactions</li>
-                    <li class="nav-item" data-target="reports-card">Reports</li>
-                    <li class="nav-item" data-target="statements-card">Statements</li>
-                    <li class="nav-item" data-target="finance-card">Finance</li>
-                    <li class="nav-item" data-target="security-card">Security</li>
+        <!-- Right side (user menu) -->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                   <i class="fas fa-user fa-fw"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
                 </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN LAYOUT -->
+    <div id="layoutSidenav">
+        <!-- SIDE NAV -->
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Documentation</div>
+
+                        <!-- Introduction -->
+                        <a class="nav-link" href="dashboard.html" target="mainFrame">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Introduction
+                        </a>
+
+                        <!-- Joint Accounts -->
+                        <a class="nav-link" href="joint.html" target="mainFrame">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Joint Accounts
+                        </a>
+
+                        <!-- ONBOARDING -->
+                        <div class="sb-sidenav-menu-heading">Onboarding</div>
+
+                        <!-- Collapse Onboarding (Agents) -->
+                        <a class="nav-link collapsed" href="#"
+                           data-bs-toggle="collapse"
+                           data-bs-target="#collapseOnboarding"
+                           aria-expanded="false"
+                           aria-controls="collapseOnboarding">
+                            <!-- <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div> -->
+                            Onboarding
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOnboarding" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="agents.html" target="mainFrame">Agents</a>
+                            </nav>
+                        </div>
+
+                        <!-- Collapse Add Member (Single / Joint / Institutional) -->
+                        <a class="nav-link collapsed" href="#"
+                           data-bs-toggle="collapse"
+                           data-bs-target="#collapseAddMember"
+                           aria-expanded="false"
+                           aria-controls="collapseAddMember">
+                            <!-- <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div> -->
+                            Add Member
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseAddMember" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="single.html" target="mainFrame">Single Member</a>
+                                <a class="nav-link" href="joint.html" target="mainFrame">Joint Member</a>
+                                <a class="nav-link" href="institutional.html" target="mainFrame">Institutional Member</a>
+                            </nav>
+                        </div>
+
+                        <!-- SYSTEM -->
+                        <div class="sb-sidenav-menu-heading">System</div>
+
+                        <a class="nav-link collapsed" href="#"
+                           data-bs-toggle="collapse"
+                           data-bs-target="#collapseSystem"
+                           aria-expanded="false"
+                           aria-controls="collapseSystem">
+                            <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div>
+                            Configuration
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseSystem" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="roles.html" target="mainFrame">Roles &amp; Permissions</a>
+                                <a class="nav-link" href="reports-doc.html" target="mainFrame">Reports Guide</a>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Unit Master User
+                </div>
             </nav>
-        </aside>
+        </div>
 
-        <!-- Main content -->
-        <main class="content">
-            <section class="lead">
-                <p>
-                Unit   Master is a comprehensive front-to-back financial operations and capital markets platform designed for asset managers, private managers, and investment institutions. It manages portfolios, positions, accounts, orders, NAVs, transactions, payouts, reconciliation, performance, risk, and reporting all within a flexible, modular, and scalable system. Built for high stability, fast performance, and seamless integration, Unit Master supports both standalone and real-time operations, providing a powerful, modern solution that streamlines the entire investment and operations lifecycle.
-                </p>
-            </section>
+        <!-- CONTENT AREA -->
+        <div id="layoutSidenav_content">
+            <main>
+                <!-- Iframe qui charge les pages de documentation -->
+                <iframe
+                    src="dashboard.html"
+                    name="mainFrame"
+                    class="content-frame"
+                ></iframe>
+            </main>
 
-            <section class="cards">
-                <!-- Card: Overview -->
-                <article class="card" id="overview-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-circle-info"></i>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Unit Master 2025</div>
+                        <div>
+                            <a href="#!">Privacy Policy</a>
+                            &middot;
+                            <a href="#!">Terms &amp; Conditions</a>
                         </div>
-                        <h3>Overview</h3>
                     </div>
-                    <p>
-                        Unit Master centralises all key investment operations in one platform. It coordinates client accounts,
-                        portfolios, and records so that teams can see the full picture at a glance. Dashboards and summaries
-                        give management a quick view of fund performance, client activity, and operational trends.
-                    </p>
-                </article>
-
-                <!-- Card: Transactions -->
-                <article class="card" id="transactions-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-right-left"></i>
-                        </div>
-                        <h3>Transactions</h3>
-                    </div>
-                    <p>
-                      The Transactions section is where all money movements are handled. Here you can make withdrawals, switch between your different accounts, and transfer funds from one account to another. It gives you a clear view of how money is coming in and going out of your accounts.
-                    </p>
-                </article>
-
-                <!-- Card: Reports -->
-                <article class="card" id="reports-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-file-lines"></i>
-                        </div>
-                        <h3>Reports</h3>
-                    </div>
-                    <p>
-                        The Reports section provides a summary of key information about clients and agents. It brings together important data in one place so that you can quickly review client activity, agent performance, and other high level trends that support monitoring and decision making.
-                    </p>
-                </article>
-
-                <!-- Card: Statements -->
-                <article class="card" id="statements-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-receipt"></i>
-                        </div>
-                        <h3>Statements</h3>
-                    </div>
-                    <p>
-                        The Statements section gives you a detailed record of account activity over a selected period. It shows the amounts deposited, the funds invested, and the interest earned. This helps clients track how their money is growing and verify all movements on their accounts.
-                    </p>
-                </article>
-
-                <!-- Card: Finance -->
-                <article class="card" id="finance-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <h3>Finance</h3>
-                    </div>
-                    <p>
-                       The Finance section explains how fund expenses are managed and applied. Fund expenses are accrued on a daily basis and deducted from the daily fund value, so that the unit price reflects the true cost of managing the fund. Withdrawals from the fund are then processed on a monthly basis, allowing clients to access their money in an organised way.
-                    </p>
-                </article>
-
-                <!-- Card: Security -->
-                <article class="card" id="security-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <h3>Security</h3>
-                    </div>
-                    <p>
-                        The Security section is where clients can see how and where their money is invested. It lists the different investment options or instruments in which funds are placed and allows clients to review each holding. This helps clients understand how their investments are allocated and how each security is performing.
-                    </p>
-                </article>
-            </section>
-        </main>
+                </div>
+            </footer>
+        </div>
     </div>
-</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const sectionButton = document.querySelector(".nav-section-btn");
-        const sectionList = document.querySelector(".nav-section");
-
-        if (sectionButton && sectionList) {
-            sectionButton.addEventListener("click", () => {
-                sectionList.classList.toggle("nav-section-closed");
-                sectionButton.classList.toggle("section-closed");
-            });
-        }
-
-        const items = document.querySelectorAll(".nav-item");
-
-        items.forEach(item => {
-            item.addEventListener("click", () => {
-                // active state in sidebar
-                items.forEach(i => i.classList.remove("active"));
-                item.classList.add("active");
-
-                const targetId = item.getAttribute("data-target");
-                if (!targetId) return;
-
-                const card = document.getElementById(targetId);
-                if (!card) return;
-
-                // smooth scroll to card
-                card.scrollIntoView({ behavior: "smooth", block: "start" });
-
-                // pop animation
-                card.classList.remove("card-pop");
-                // small timeout so animation can restart if same card is clicked again
-                setTimeout(() => {
-                    card.classList.add("card-pop");
-                }, 50);
-
-                // remove class after animation finishes
-                setTimeout(() => {
-                    card.classList.remove("card-pop");
-                }, 450);
-            });
-        });
-    });
-</script>
+    <!-- Bootstrap & Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

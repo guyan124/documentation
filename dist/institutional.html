@@ -2,547 +2,171 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Unit Master – Institutional Member Registration Guide</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Google Font + Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Add a New Institutional Member</title>
     <style>
-        :root {
-            --bg-body: #f3f4f6;
-            --bg-hero: #281746;
-            --accent: #6366f1;
-            --accent-soft: #e0e7ff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --doc-bg: #ffffff;
-            --border-soft: #e5e7eb;
-        }
-
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8ff;
             margin: 0;
             padding: 0;
+            color: #003366;
         }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-        }
-
-        .page-shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #1f1235, #24104f 55%, #3b0764 100%);
-            color: #f9fafb;
-            padding: 3.5rem 1.5rem 4.5rem;
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
-        }
-
-        .hero-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .hero-kicker {
-            font-size: 0.9rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: 0.4rem;
-        }
-
-        .hero-title {
-            font-size: clamp(2.3rem, 3.3vw, 2.9rem);
-            font-weight: 700;
-            letter-spacing: 0.03em;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        .hero-doc-intro {
-            margin-top: 2rem;
-            background: #f9fafb;
-            color: var(--text-main);
-            border-radius: 1.5rem;
-            padding: 1.6rem 1.8rem;
-            max-width: 1040px;
-            box-shadow:
-                0 18px 45px rgba(15, 23, 42, 0.28),
-                0 0 0 1px rgba(148, 163, 184, 0.18);
-        }
-
-        .hero-doc-intro p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .hero-doc-intro p span.highlight {
-            font-weight: 600;
-            color: var(--accent);
-        }
-
-        main {
-            flex: 1;
-            padding: 2.5rem 1.5rem 3.5rem;
-        }
-
-        .doc-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .doc-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .meta-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.28rem 0.7rem;
-            font-size: 0.75rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-soft);
+        .container {
+            width: 80%;
+            margin: 40px auto;
             background: #ffffff;
-            color: var(--text-muted);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
-        .meta-pill i {
-            font-size: 0.8rem;
-            color: var(--accent);
+        h1, h2 {
+            color: #0050a5;
         }
-
-        .doc-section {
-            background: var(--doc-bg);
-            border-radius: 1.2rem;
-            border: 1px solid var(--border-soft);
-            padding: 1.35rem 1.6rem 1.4rem;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
-            position: relative;
-
-            opacity: 0;
-            transform: translateY(14px);
-            transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .doc-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .doc-section:hover {
-            border-color: var(--accent-soft);
-            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
-        }
-
-        .doc-section-header {
-            display: flex;
-            gap: 0.9rem;
-            align-items: center;
-            margin-bottom: 0.6rem;
-        }
-
-        .doc-step-number {
-            width: 30px;
-            height: 30px;
-            border-radius: 999px;
-            background: radial-gradient(circle at 30% 0, var(--accent), #312e81);
-            color: #eef2ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
-            flex-shrink: 0;
-        }
-
-        .doc-section-title {
-            font-size: 1rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            position: relative;
-        }
-
-        .doc-section-title span.badge {
-            font-size: 0.7rem;
-            font-weight: 500;
-            padding: 0.12rem 0.5rem;
-            border-radius: 999px;
-            background: var(--accent-soft);
-            color: #4f46e5;
-        }
-
-        .doc-section-title::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -0.32rem;
-            width: 0;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            transition: width 0.3s ease;
-        }
-
-        .doc-section:hover .doc-section-title::after {
-            width: 100%;
-        }
-
-        .doc-section-body {
-            margin-top: 0.7rem;
-            font-size: 0.9rem;
+        p {
             line-height: 1.7;
-            color: var(--text-muted);
+            font-size: 15px;
         }
-
-        .doc-section-body p + p {
-            margin-top: 0.55rem;
+        .step-box {
+            background: #e9f2ff;
+            border-left: 5px solid #007bff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
         }
-
-        .doc-section-body ul {
-            margin-top: 0.4rem;
-            margin-left: 1.2rem;
-            list-style: disc;
+        ul {
+            margin-top: 10px;
         }
-
-        .doc-section-body li + li {
-            margin-top: 0.18rem;
+        li {
+            margin-bottom: 6px;
         }
-
-        .doc-section-body strong {
-            color: #111827;
-        }
-
-        .doc-section-title {
-            transition: color 0.25s ease;
-            cursor: default;
-        }
-
-        .doc-section:hover .doc-section-title {
-            color: var(--accent);
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 2.6rem 1.1rem 3.3rem;
-            }
-
-            .hero-doc-intro {
-                padding: 1.3rem 1.35rem;
-                border-radius: 1.1rem;
-            }
-
-            .doc-section {
-                padding: 1.15rem 1.2rem 1.2rem;
-                border-radius: 1rem;
-            }
+        .highlight {
+            background: #d6ecff;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-<div class="page-shell">
-    <!-- HERO -->
-    <header class="hero">
-        <div class="hero-inner">
-            <p class="hero-kicker">Unit Master Documentation</p>
-            <h1 class="hero-title">Institutional & Group Member Registration</h1>
-            <p class="hero-subtitle">
-                A clear guide for registering schools, companies, NGOs and other groups as members in Unit Master.
-            </p>
+    <div class="container">
+        <h1>How to Add a New Institutional Member</h1>
+        <p>
+            Welcome to the Institutional Member Registration Guide! This guide will help you register
+            an <strong>Institutional Member</strong> in the system. Follow each step carefully to complete
+            the setup successfully.
+        </p>
 
-            <div class="hero-doc-intro">
-                <p>
-                    <span class="highlight">Institutional Members</span> include organisations such as schools,
-                    companies, NGOs and community groups. This guide walks you through every step of registering a
-                    group account, from capturing group details and contact information to statutory compliance,
-                    account preferences and bank instructions.
-                </p>
+        <div class="step-box">
+            <h2>Step 1: Access the "Add New Member" Page</h2>
+            <ul>
+                <li>Log into the application and click on <strong>Members</strong> in the left sidebar.</li>
+                <li>Select <strong>Add a New Member</strong> to begin the registration process.</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 2: Choose Member Type</h2>
+            <p>Select <strong>Institutional Member</strong> from the Member Type dropdown menu.</p>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 3: Enter Institutional Details</h2>
+            <ul>
+                <li>Institution Name</li>
+                <li>Institution Type (e.g., Company, NGO, School)</li>
+                <li>Date of Incorporation</li>
+                <li>Registration Number</li>
+                <li>Tax PIN</li>
+                <li>Country of Registration</li>
+                <li>Nature of Business</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 4: Provide Contact Person Details</h2>
+            <p>Enter the details of the official contact person:</p>
+            <ul>
+                <li>Full Name</li>
+                <li>Position/Title</li>
+                <li>Phone Number</li>
+                <li>Email Address</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 5: Add Registered Address</h2>
+            <ul>
+                <li>Physical Address</li>
+                <li>District</li>
+                <li>Postal Address</li>
+                <li>Email Address</li>
+                <li>Telephone Number</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 6: Statutory and Compliance Details</h2>
+            <ul>
+                <li>Is the Institution Resident? — Yes/No</li>
+                <li>Tax Compliance Status</li>
+                <li>Adverse Media Screening Done — Yes/No</li>
+                <li>PEP (Politically Exposed Person) Check</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 7: Authorized Signatories</h2>
+            <p>Add individuals who are authorized to operate or represent the institution:</p>
+            <ul>
+                <li>Full Name</li>
+                <li>Designation</li>
+                <li>Phone Number</li>
+                <li>Email Address</li>
+                <li>ID or Passport Number</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 8: Account Details</h2>
+            <ul>
+                <li>Fund Name</li>
+                <li>Fee Category</li>
+                <li>Withdraw Dividends? — Yes/No</li>
+                <li>Agent/Introducer Name (Optional)</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>Step 9: Bank Details</h2>
+            <p>You may enter the institution’s banking details now or skip and add later.</p>
+            <div class="highlight">
+                <strong>If Yes:</strong> Enter bank name, branch, currency, account name, account number, and account type.<br>
+                <strong>If No:</strong> You can continue, but withdrawals will not be available until bank details are added.
             </div>
         </div>
-    </header>
 
-    <!-- MAIN DOCUMENT -->
-    <main>
-        <div class="doc-wrapper">
-            <div class="doc-meta">
-                <div class="meta-pill">
-                    <i class="far fa-file-alt"></i>
-                    Institutional / Group Member Registration
-                </div>
-                <div class="meta-pill">
-                    <i class="far fa-clock"></i>
-                    Approx. completion time: 7–10 minutes
-                </div>
-                <div class="meta-pill">
-                    <i class="fas fa-building"></i>
-                    Organisations & groups
-                </div>
-            </div>
-
-            <!-- 1 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">1</div>
-                    <h2 class="doc-section-title">
-                        Opening the institutional registration form
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        After logging into Unit Master, navigate to the <strong>Members</strong> section on the left
-                        menu and click <strong>Add a New Member</strong>. From the member type options, select
-                        <strong>Institutional / Group</strong> to open the correct registration flow.
-                    </p>
-                    <p>
-                        This wizard is designed to capture information for legal entities, so most fields refer to the
-                        group itself rather than to an individual person.
-                    </p>
-                </div>
-            </section>
-
-            <!-- 2 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">2</div>
-                    <h2 class="doc-section-title">
-                        Group details
-                        <span class="badge">Organisation profile</span>
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        The <strong>Group Details</strong> step captures the core identity of the organisation:
-                    </p>
-                    <ul>
-                        <li>
-                            <strong>Group Member Name</strong> – full legal name of the institution or group
-                            (for example “Miriam Keli Muli School”).
-                        </li>
-                        <li>
-                            <strong>Industry</strong> – select the sector the organisation operates in, such as ICT,
-                            Education or Health.
-                        </li>
-                        <li>
-                            <strong>Date of Incorporation / Registration</strong> – official registration date of the group.
-                        </li>
-                        <li>
-                            <strong>Institution Type</strong> – choose whether it is a School, Company, NGO, etc.
-                        </li>
-                        <li>
-                            <strong>Category</strong> – specify if this is a Group or a Company.
-                        </li>
-                        <li>
-                            <strong>Registration Number</strong> – the official registration number from the regulator.
-                        </li>
-                    </ul>
-                    <p>
-                        All required fields must be completed before you can move to the next step. These details form
-                        the legal identity of the member in the system.
-                    </p>
-                </div>
-            </section>
-
-            <!-- 3 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">3</div>
-                    <h2 class="doc-section-title">
-                        Contact details and communication setup
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        In the <strong>Contact Details</strong> section, provide the official contact information for
-                        the institution.
-                    </p>
-                    <p><strong>Location and address:</strong></p>
-                    <ul>
-                        <li><strong>Postal Address</strong> – mailing address for formal correspondence.</li>
-                        <li><strong>Postal Code</strong> – code identifying the mailing area.</li>
-                        <li><strong>Country of Residence</strong> – the country where the institution is based.</li>
-                        <li><strong>District</strong> – regional or administrative district.</li>
-                        <li>
-                            <strong>Town</strong> – town or city; a default such as “Dar es Salaam” may appear and can
-                            be changed if needed.
-                        </li>
-                    </ul>
-                    <p><strong>Phones and email:</strong></p>
-                    <ul>
-                        <li><strong>Mobile Phone Number</strong> – main contact number for SMS alerts.</li>
-                        <li><strong>Telephone Number</strong> – optional landline or alternative number.</li>
-                        <li><strong>Email Address</strong> – official email for statements and notifications.</li>
-                    </ul>
-                    <p><strong>Communication preferences:</strong></p>
-                    <ul>
-                        <li><strong>Accept SMS Notifications?</strong> – choose whether to receive SMS alerts.</li>
-                        <li><strong>Send SMS Queries?</strong> – specify if the system can send queries by SMS.</li>
-                        <li>
-                            <strong>Receive Statement Via?</strong> – choose Email or Postage Mail. Email is usually
-                            free, while postage may attract a charge.
-                        </li>
-                    </ul>
-                    <p><strong>Additional fields:</strong></p>
-                    <ul>
-                        <li><strong>Website URL</strong> – optional website address of the institution.</li>
-                        <li><strong>Physical Address</strong> – full physical location for visits and documentation.</li>
-                        <li>
-                            <strong>Account Mandate</strong> – select how the account is operated (for example,
-                            individual signatory, joint signatories or institutional mandate).
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 4 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">4</div>
-                    <h2 class="doc-section-title">
-                        Statutory details and compliance checks
-                        <span class="badge">KYC & AML</span>
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        The <strong>Statutory Details</strong> step collects information required for KYC, AML and tax
-                        reporting.
-                    </p>
-                    <p><strong>Client residency and citizenship:</strong></p>
-                    <ul>
-                        <li><strong>Is client resident?</strong> – confirm whether the institution is resident in the country.</li>
-                        <li><strong>Has dual citizenship?</strong> – indicate if applicable to the entity or its principals.</li>
-                        <li><strong>Is client a US citizen?</strong> – relevant for FATCA screening.</li>
-                    </ul>
-                    <p><strong>Tax information:</strong></p>
-                    <ul>
-                        <li><strong>Tax No</strong> – tax identification number for the institution.</li>
-                        <li><strong>Is client tax exempt?</strong> – select Yes for tax-exempt organisations.</li>
-                        <li>
-                            <strong>Exempt Certificate Expiry Date</strong> – expiry date of the tax exemption certificate.
-                        </li>
-                    </ul>
-                    <p><strong>Compliance and screening:</strong></p>
-                    <ul>
-                        <li><strong>Has Adverse Media Screening Been done?</strong> – confirm that the screening was performed.</li>
-                        <li><strong>Has Group/Sub Members</strong> – indicate whether the institution has sub-members or is part of a larger group.</li>
-                        <li><strong>Group Member Logo</strong> – optional logo upload for the group profile.</li>
-                        <li><strong>Is member a PEP?</strong> – state if the entity is linked to a Politically Exposed Person.</li>
-                        <li><strong>What is the screening status?</strong> – set to True once screening is successfully completed.</li>
-                    </ul>
-                    <p><strong>Account preferences and document handling:</strong></p>
-                    <ul>
-                        <li><strong>Do you want to withdraw Monthly Interest?</strong> – choose whether interest is paid out monthly or reinvested.</li>
-                        <li><strong>Is this a suspense account?</strong> – mark Yes if the account is temporary or pending verification.</li>
-                        <li><strong>Client sign-off date</strong> – date the institution signed the documents.</li>
-                        <li><strong>Admin received date</strong> – date the administrator received the paperwork.</li>
-                        <li><strong>Risk Assessment completed date</strong> – date of the final risk assessment.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 5 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">5</div>
-                    <h2 class="doc-section-title">
-                        Account details for the fund
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        The <strong>Account Details</strong> section defines how the institutional member invests with
-                        the platform.
-                    </p>
-                    <ul>
-                        <li>
-                            <strong>Fund Name</strong> – select the investment fund being opened for the institution.
-                        </li>
-                        <li>
-                            <strong>Agent Name</strong> – choose the agent or relationship manager responsible for this fund.
-                        </li>
-                        <li>
-                            <strong>Fund Description</strong> – optional description of the fund’s goal or strategy.
-                        </li>
-                        <li>
-                            <strong>Show Tax on Statement?</strong> – decide whether tax details are displayed on statements.
-                        </li>
-                        <li>
-                            <strong>Note / Instructions</strong> – any internal notes or special instructions for staff.
-                        </li>
-                        <li>
-                            <strong>Fee Category</strong> – select the fee structure that applies (for example,
-                            management fee category).
-                        </li>
-                        <li>
-                            <strong>Withdraw Dividends?</strong> – choose whether dividends are paid out in cash or automatically reinvested.
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 6 -->
-            <section class="doc-section">
-                <div class="doc-section-header">
-                    <div class="doc-step-number">6</div>
-                    <h2 class="doc-section-title">
-                        Final review and completion
-                        <span class="badge">Finish</span>
-                    </h2>
-                </div>
-                <div class="doc-section-body">
-                    <p>
-                        Once all sections have been completed, review the captured data to ensure names, registration
-                        numbers, tax details, contact information and preferences are correct. Confirm that all required
-                        fields are filled in and that compliance screening dates have been entered.
-                    </p>
-                    <p>
-                        When you are satisfied, click <strong>Finish</strong> to submit the institutional registration.
-                        Unit Master will validate the information and create the group member profile so that accounts
-                        can start receiving investments and transactions under the selected fund.
-                    </p>
-                </div>
-            </section>
+        <div class="step-box">
+            <h2>Step 10: Upload Required Documents</h2>
+            <ul>
+                <li>Certificate of Incorporation</li>
+                <li>KRA PIN Certificate</li>
+                <li>Board Resolution</li>
+                <li>ID Copies of Signatories</li>
+                <li>Business Permit (If Applicable)</li>
+            </ul>
         </div>
-    </main>
-</div>
 
-<script>
-    const sections = document.querySelectorAll(".doc-section");
+        <div class="step-box">
+            <h2>Step 11: Complete Registration</h2>
+            <p>Click <strong>Finish</strong> to complete the institutional member registration.</p>
+            <p>Missing or incorrect fields will be highlighted in red for correction.</p>
+        </div>
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.25 });
-
-    sections.forEach(section => observer.observe(section));
-</script>
+        <p style="text-align:center; margin-top:30px; font-size:14px; color:#555;">End of Institutional Member Registration Guide</p>
+    </div>
 </body>
 </html>

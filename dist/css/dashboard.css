@@ -1,0 +1,235 @@
+:root{
+  --bg: #f4f8fc;
+  --card: #ffffff;
+  --accent: #2563eb;
+  --muted: #6b7280;
+  --radius: 12px;
+  --container: 1100px;
+  --flow: 18px;
+  --max-sidew: 300px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  color:#0f172a;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+/* Layout principal */
+.wrap{
+  max-width:var(--container);
+  margin:28px auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:24px;
+}
+
+@media (max-width:960px){
+  .wrap{
+    grid-template-columns:1fr;
+    padding:14px;
+  }
+}
+
+/* Carte principale */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 8px 28px rgba(15,23,42,0.06);
+  padding:22px;
+}
+
+/* Header */
+header.doc{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.brand{
+  width:56px;
+  height:56px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),#4f83ff);
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:700;
+  font-size:18px;
+}
+
+h1{
+  margin:0;
+  font-size:20px;
+}
+
+p.lead{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* Contenu */
+.content{
+  padding:4px 2px;
+}
+
+section{
+  margin-bottom:var(--flow);
+}
+
+section h2{
+  font-size:16px;
+  margin:0 0 8px;
+}
+
+section p{
+  margin:0 0 10px;
+  line-height:1.6;
+  color:black;
+}
+
+/* Bloc définition */
+.definition{
+  border-left:4px solid var(--accent);
+  background:#f8fbff;
+  padding:12px 14px;
+  border-radius:8px;
+  margin:8px 0;
+}
+
+/* Notes / texte secondaire */
+.muted{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.note{
+  background:linear-gradient(90deg,#fff,#fbfdff);
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(37,99,235,0.06);
+  font-size:14px;
+  color:#0f172a;
+}
+
+/* ===== ACCORDION (sections déroulantes) ===== */
+details.accordion{
+  border-radius:10px;
+  background:#f9fbff;
+  padding:0 12px;
+  margin:10px 0;
+  border:1px solid rgba(15,23,42,0.06);
+}
+
+details.accordion[open]{
+  background:#f1f5ff;
+  border-color:rgba(37,99,235,0.28);
+}
+
+details.accordion summary{
+  list-style:none;
+  cursor:pointer;
+  padding:10px 4px;
+  font-weight:600;
+  color:var(--accent);
+  position:relative;
+  user-select:none;
+}
+
+details.accordion summary::-webkit-details-marker{
+  display:none;
+}
+
+details.accordion summary::after{
+  content:"▾";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:12px;
+  transition:transform .18s ease;
+  color:var(--muted);
+}
+
+details.accordion[open] summary::after{
+  transform:translateY(-50%) rotate(180deg);
+}
+
+.accordion-body{
+  padding:0 0 10px 2px;
+  margin-top:4px;
+  border-top:1px solid #e5e7eb;
+  font-size:14px;
+  line-height:1.6;
+  color:#111827;
+}
+
+/* ===== SIDEBAR ===== */
+aside{
+  position:sticky;
+  top:28px;
+  height:max-content;
+}
+
+.toc-title{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.toc{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.toc li{
+  margin:8px 0;
+}
+
+.toc a{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:600;
+  color:var(--accent);
+}
+
+footer.small{
+  margin-top:12px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:999px;
+  background:#eef6ff;
+  color:var(--accent);
+  font-weight:600;
+  font-size:13px;
+  margin-left:8px;
+}
+
+/* Impression */
+@media print{
+  body{background:white;}
+  aside{display:none;}
+  .wrap{max-width:100%;}
+  .card{box-shadow:none;}
+}
