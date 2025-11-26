@@ -16,7 +16,6 @@
 
 html,
 body{
-  /* pas de height:100 ici */
   min-height:100%;
   margin:0;
   font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
@@ -33,11 +32,12 @@ a{
 /* Layout principal */
 .wrap{
   max-width:var(--container);
-  margin:28px auto;
+  margin:20px auto 28px;      /* plus d’espace en haut */
   padding:20px;
   display:grid;
   grid-template-columns:1fr 320px;
   gap:24px;
+  overflow:visible;
 }
 
 @media (max-width:960px){
@@ -47,12 +47,15 @@ a{
   }
 }
 
-/* Cartes */
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  box-shadow:0 8px 28px rgba(15,23,42,0.06);
-  padding:22px;
+/* CARTES – totalement plates + rien de coupé */
+.card,
+.card-body{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  padding:0;
+  overflow:visible !important;   /* très important pour voir le haut du contenu */
 }
 
 /* Header */
@@ -60,7 +63,8 @@ header.doc{
   display:flex;
   gap:16px;
   align-items:center;
-  margin-bottom:12px;
+  margin-bottom:20px;
+  padding:16px 0;
 }
 
 .brand{
@@ -77,7 +81,7 @@ header.doc{
 
 h1{
   margin:0;
-  font-size:20px;
+  font-size:22px;
 }
 
 p.lead{
@@ -88,11 +92,13 @@ p.lead{
 
 /* Contenu texte */
 .content{
-  padding:4px 2px;
+  padding:8px 0;
+  overflow:visible;
 }
 
 section{
   margin-bottom:var(--flow);
+  overflow:visible;
 }
 
 section h2{
@@ -125,33 +131,39 @@ section p{
   background:linear-gradient(90deg,#fff,#fbfdff);
   padding:10px;
   border-radius:8px;
-  border:1px solid rgba(37,99,235,0.06);
+  border:none;
   font-size:14px;
   color:#0f172a;
 }
 
-/* ACCORDION */
+/* ACCORDION – plat comme la page, léger arrondi */
 details.accordion{
-  border-radius:10px;
-  background:#f9fbff;
-  padding:0 12px;
-  margin:10px 0;
-  border:1px solid rgba(15,23,42,0.06);
+  border:none;
+  background:transparent;
+  padding:0;
+  margin:8px 0;
 }
 
+/* pas de fond spécial quand c’est ouvert */
 details.accordion[open]{
-  background:#f1f5ff;
-  border-color:rgba(37,99,235,0.28);
+  background:transparent;
 }
 
+/* Barre cliquable */
 details.accordion summary{
   list-style:none;
   cursor:pointer;
-  padding:10px 4px;
+  padding:12px 16px;
   font-weight:600;
   color:var(--accent);
   position:relative;
   user-select:none;
+  background:transparent;   /* même fond que la page */
+  border-radius:8px;        /* coins un peu courbés */
+}
+
+details.accordion[open] summary{
+  border-radius:8px 8px 0 0;
 }
 
 details.accordion summary::-webkit-details-marker{
@@ -161,7 +173,7 @@ details.accordion summary::-webkit-details-marker{
 details.accordion summary::after{
   content:"▾";
   position:absolute;
-  right:0;
+  right:16px;
   top:50%;
   transform:translateY(-50%);
   font-size:12px;
@@ -172,14 +184,31 @@ details.accordion summary::after{
 details.accordion[open] summary::after{
   transform:translateY(-50%) rotate(180deg);
 }
+/* Effet survol comme Facebook */
+details.accordion summary{
+  transition: background-color .18s ease;
+}
 
+details.accordion summary:hover{
+  background:#dce0e4;      /* petite couleur au survol */
+}
+
+details.accordion[open] summary{
+  background:#dce0e4;
+}
+
+
+/* Contenu du déroulant */
 .accordion-body{
-  padding:0 0 10px 2px;
-  margin-top:4px;
-  border-top:1px solid #e5e7eb;
+  padding:8px 18px 14px 18px;
+  margin:0;
+  border-top:none;
   font-size:14px;
   line-height:1.6;
   color:#111827;
+  border-bottom-left-radius:8px;
+  border-bottom-right-radius:8px;
+  background:transparent;   /* plus de rectangle coloré */
 }
 
 /* Images des étapes */
@@ -210,10 +239,10 @@ details.accordion[open] summary::after{
   box-shadow:0 4px 16px rgba(15,23,42,0.12);
 }
 
-/* SIDEBAR TABLE OF CONTENTS */
-/* Important: plus de position sticky ici, sidebar normale */
+/* TABLE OF CONTENTS */
 aside{
-  margin-top:16px;
+  margin-top:8px;
+  padding-left:32px;
 }
 
 .toc-title{
@@ -229,13 +258,13 @@ aside{
 }
 
 .toc li{
-  margin:8px 0;
+  margin:6px 0;
 }
 
 .toc a{
   display:inline-block;
-  padding:6px 8px;
-  border-radius:8px;
+  padding:4px 6px;
+  border-radius:6px;
   font-weight:600;
   color:var(--accent);
 }
@@ -272,8 +301,12 @@ footer.small{
   }
   .wrap{
     max-width:100%;
+    margin:0;
   }
-  .card{
+  .card,
+  .card-body{
     box-shadow:none;
+    background:white;
+    padding:0;
   }
 }

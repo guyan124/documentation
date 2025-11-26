@@ -82,6 +82,7 @@
 *,
 *::before,
 *::after {
+
   box-sizing: border-box;
 }
 
@@ -11288,10 +11289,10 @@ body.sb-nav-fixed {
     min-height: calc(100vh - 120px);
 }
 
-/* ===== One scrollbar: on ne scrolle que dans l'iframe, pas la page entière ===== */
+/* ===== One scrollbar */
 
 body.sb-nav-fixed {
-    overflow: hidden; /* Empêche le scroll sur le body */
+    overflow: hidden;
 }
 
 #layoutSidenav {
@@ -11300,10 +11301,10 @@ body.sb-nav-fixed {
 
 #layoutSidenav_content {
     height: 100%;
-    overflow: hidden; /* Empêche un deuxième scrollbar ici */
+    overflow: hidden;
 }
 
-/* L'iframe occupe tout l'espace disponible dans la zone content */
+/* iframe pick the contentt */
 .content-frame {
     width: 100%;
     height: 100%;
@@ -11314,8 +11315,37 @@ body.sb-nav-fixed {
 /* Fix iframe */
 .content-frame {
     width: 100%;
-    height: 100vh;     /* prend toute la hauteur */
+    height: 100vh;
     border: none;
     display: block;
     background: white;
+}
+
+/* === sidebar more lighter === */
+
+.sb-sidenav-dark {
+    background-color: #1f2933;
+}
+
+
+.sb-sidenav-dark .nav-link {
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+.sb-sidenav-dark .sb-nav-link-icon {
+    color: #9ca3af;
+}
+
+
+.sb-sidenav-dark .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(148, 163, 184, 0.16);
+}
+
+
+.sb-sidenav-dark .sb-sidenav-menu-heading {
+    color: #9ca3af;
+    font-weight: 600;
+    letter-spacing: 0.05em;
 }
