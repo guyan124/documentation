@@ -81,6 +81,7 @@
                             Introduction
                         </a>
 
+
                         <!-- ONBOARDING -->
                         <div class="sb-sidenav-menu-heading">Members Onboarding</div>
 
@@ -120,13 +121,15 @@
                         </div>
 
                         <!-- SYSTEM -->
-                        <div class="sb-sidenav-menu-heading">Adminstration</div>
+
+                       <!-- SYSTEM -->
+                        <div class="sb-sidenav-menu-heading">Administration</div>
 
                         <a class="nav-link collapsed" href="#"
-                           data-bs-toggle="collapse"
-                           data-bs-target="#collapseSystem"
-                           aria-expanded="false"
-                           aria-controls="collapseSystem">
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseSystem"
+                        aria-expanded="false"
+                        aria-controls="collapseSystem">
                             <div class="sb-nav-link-icon"><i class="fa-brands fa-black-tie"></i></div>
                             Administration
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -142,9 +145,29 @@
                                 <a class="nav-link" href="/dist/administation/communication_templates.html" target="mainFrame">Communication Templates</a>
                                 <a class="nav-link" href="/dist/administation/error_logs.html" target="mainFrame">Error Logs</a>
                                 <a class="nav-link" href="/dist/administation/bulk_emails.html" target="mainFrame">Bulk Emails</a>
-                                <!-- <a class="nav-link" href="reports-doc.html" target="mainFrame">Reports Guide</a> -->
                             </nav>
                         </div>
+
+                        <!-- TRANSACTIONS -->
+                        <a class="nav-link collapsed" href="#"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTransactions"
+                        aria-expanded="false"
+                        aria-controls="collapseTransactions">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
+                            Transactions
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseTransactions" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/dist/transactions/Interest_distribution.html" target="mainFrame">Interest Distribution</a>
+                                <a class="nav-link" href="/dist/transactions/eod.html" target="mainFrame">EOD Processing</a>
+                                <a class="nav-link" href="/dist/transactions/fund_switch.html" target="mainFrame">Fund Switch</a>
+                                <a class="nav-link" href="/dist/transactions/reverse_interest.html" target="mainFrame">Reverse Interest</a>
+                            </nav>
+                        </div>
+
+
 
                  </div>
  </div>
